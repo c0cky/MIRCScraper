@@ -214,12 +214,11 @@ class DmozSpider(scrapy.Spider):
 'http://mirc.sc.edu/islandora/search/catch_all_txt%3A%28*%3A*%29?page=206' ]
 
 def parse(self, response):
-    for sel in
-        response.xpath('//div[@class="islandora-solr-search-result-inner"]'):
+    for sel in response.xpath('//div[@class="islandora-solr-search-result-inner"]'):
         item = DmozItem()
         item['image_urls'] = sel.xpath('dl/dt/a/img/@src').extract()
         item['identifier'] = sel.xpath('dl/dt/a/@href').extract()
         item['title'] = sel.xpath('dl/dd[@class="solr-value pb-parent-title-main-ms"]/text()').extract()
         item['desc'] = sel.xpath('dl/dd[@class="solr-value pb-parent-description-summary-ms"]/text()').extract()
-        item['vid_url'] = sel.xpath('')
+        item['vid_url'] = sel.xpath('//a[@class="usc-flowplayer"]/@href').extract()
         yield item
