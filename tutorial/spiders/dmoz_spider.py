@@ -219,8 +219,18 @@ def parse(self, response):
     for sel in response.xpath('//div[@class="islandora-solr-search-result-inner"]'):
         item = DmozItem()
         item['image_urls'] = sel.xpath('dl/dt/a/img/@src').extract()
-        item['identifier'] = sel.xpath('dl/dt/a/@href').extract()
+        identifier = sel.xpath('dl/dt/a/@href').extract()
+        item['identifier'] = identifier
         item['title'] = sel.xpath('dl/dd[@class="solr-value pb-parent-title-main-ms"]/text()').extract()
         item['desc'] = sel.xpath('dl/dd[@class="solr-value pb-parent-description-summary-ms"]/text()').extract()
+        absolute_url = BASE_URL + identifier
+        request = scrapy.Request(absolute_url, callback=self.parse_vid)
+        request.meta['item'] = item
         item['vid_url'] = sel.xpath('//a[@class="usc-flowplayer"]/@href').extract()
         yield item
+
+
+def parse_vid(self, response):
+    item = response.meta['item']
+    item['vid_url'] = reponse.xpath('//a[@class="usc-flowplayer"]/@href').extract()
+    return item
