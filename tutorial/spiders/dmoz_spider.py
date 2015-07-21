@@ -226,7 +226,6 @@ def parse(self, response):
         absolute_url = BASE_URL + identifier
         request = scrapy.Request(absolute_url, callback=self.parse_vid)
         request.meta['item'] = item
-        item['vid_url'] = sel.xpath('//a[@class="usc-flowplayer"]/@href').extract()
         yield item
 
 
