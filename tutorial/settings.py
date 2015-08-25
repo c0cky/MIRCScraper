@@ -17,4 +17,4 @@ NEWSPIDER_MODULE = 'tutorial.spiders'
 #USER_AGENT = 'tutorial (+http://www.yourdomain.com)'
 
 ITEM_PIPELINES = {'scrapy.contrib.pipeline.images.ImagesPipeline':1}
-IMAGES_STORE = '/home/cocky/tutorial/images'
+IMAGES_STORE = '/Users/godboutc/Desktop/Django/MIRCScraper/tutorial/IMAGES'

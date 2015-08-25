@@ -9,9 +9,9 @@ class FSImagesStoreChangeableDirectory(FSImagesStore):
 
     def persist_image(self, key, image, buf, info,append_path):
         absolute_path = self._get_filesystem_path(append_path+'/'+key)
-	self._mkdir(os.path.dirname(absolute_path), info)
-	print absolute_path
-	image.save(absolute_path)
+	    self._mkdir(os.path.dirname(absolute_path), info)
+	    print absolute_path
+	    image.save(absolute_path)
 
 class ProjectPipeline(ImagesPipeline):
 
