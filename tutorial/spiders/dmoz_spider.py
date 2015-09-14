@@ -228,7 +228,7 @@ class DmozSpider(scrapy.Spider):
             absolute_url = BASE_URL + str(identifier[0])
             request = Request(absolute_url, callback=self.parse_vid)
             request.meta['item'] = item
-            yield request
+            return request
 
 
     def parse_vid(self, response):
